@@ -182,7 +182,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 3
+  m_GravityScale: 7
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -207,13 +207,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  jumpPower: 10
+  jumpPower: 20
+  coyoteTime: 0.25
+  extraJumps: 2
+  wallJumpX: 1500
+  wallJumpY: 750
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   wallLayer:
     serializedVersion: 2
     m_Bits: 128
+  jumpSound: {fileID: 0}
 --- !u!95 &3094811851732916105
 Animator:
   serializedVersion: 5
@@ -260,6 +265,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  fireballSound: {fileID: 0}
 --- !u!114 &7123368823412162617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,3 +284,5 @@ MonoBehaviour:
   components:
   - {fileID: 5471349418970273301}
   - {fileID: 5016002991729597923}
+  deathSound: {fileID: 0}
+  hurtSound: {fileID: 0}
