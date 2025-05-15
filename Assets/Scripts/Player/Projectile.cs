@@ -1,22 +1,20 @@
-
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField]private float speed;
+    [SerializeField] private float speed;
     private float direction;
     private bool hit;
     private float lifetime;
 
-    private BoxCollider2D boxCollider;
     private Animator anim;
+    private BoxCollider2D boxCollider;
 
     private void Awake()
     {
-        boxCollider = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
+        boxCollider = GetComponent<BoxCollider2D>();
     }
-
     private void Update()
     {
         if (hit) return;
@@ -24,15 +22,18 @@ public class Projectile : MonoBehaviour
         transform.Translate(movementSpeed, 0, 0);
 
         lifetime += Time.deltaTime;
-        if (lifetime > 5) gameObject.SetActive(false); // can change 5 secs of lifetime
+        if (lifetime > 5) gameObject.SetActive(false);
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         hit = true;
         boxCollider.enabled = false;
         anim.SetTrigger("explode");
-    }
 
+        if (collision.tag == "Enemy")
+            collision.GetComponent<Health>().TakeDamage(1);
+    }
     public void SetDirection(float _direction)
     {
         lifetime = 0;

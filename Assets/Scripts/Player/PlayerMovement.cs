@@ -14,6 +14,9 @@ public class PlayerMovement : MonoBehaviour
     private BoxCollider2D boxCollider;
     private float wallJumpCooldown;
     private float horizontalInput;
+
+    [Header ("SFX")]
+    [SerializeField] private AudioClip jumpSound;
    
     private void Awake()
     {
@@ -53,8 +56,13 @@ public class PlayerMovement : MonoBehaviour
             else
                 body.gravityScale = 3;
 
-            if (Input.GetKey(KeyCode.Space)) //check if key is pressed
+            if (Input.GetKey(KeyCode.Space))
+            {
                 Jump();
+                 
+                if (Input.GetKeyDown(KeyCode.Space) && isGrounded())
+                    SoundManager.instance.PlaySound(jumpSound);
+            } //check if key is pressed
         }
         else
             wallJumpCooldown += Time.deltaTime;
@@ -64,8 +72,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGrounded())
         {
-
-
+ 
             body.velocity = new Vector2(body.velocity.x, jumpPower);
             anim.SetTrigger("jump");
         }
