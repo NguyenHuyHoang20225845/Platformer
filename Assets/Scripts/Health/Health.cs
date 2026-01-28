@@ -22,6 +22,8 @@ public class Health : MonoBehaviour
     [SerializeField] private AudioClip deathSound;
     [SerializeField] private AudioClip hurtSound;
 
+    public GameOverMenu gameOverMenu;
+
     private void Awake()
     {
         currentHealth = startingHealth;
@@ -52,6 +54,12 @@ public class Health : MonoBehaviour
 
                 dead = true;
                 SoundManager.instance.PlaySound(deathSound);
+
+                //Show Game Over Menu
+               // FindObjectOfType<GameOverMenu>()?.ShowGameOver();
+               gameOverMenu.ShowGameOver();
+
+
             }
         }
     }
